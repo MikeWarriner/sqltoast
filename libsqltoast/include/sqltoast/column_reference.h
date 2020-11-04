@@ -19,7 +19,7 @@ typedef struct derived_column {
         value(std::move(ve))
     {}
     inline bool has_alias() const {
-        return alias.start != parse_position_t(0);
+        return alias.start != parse_position_t();
     }
 } derived_column_t;
 
@@ -30,7 +30,7 @@ typedef struct grouping_column_reference {
         column(column)
     {}
     inline bool has_collation() const {
-        return collation.start != parse_position_t(0);
+        return collation.start != parse_position_t();
     }
 } grouping_column_reference_t;
 

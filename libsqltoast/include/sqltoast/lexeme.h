@@ -7,6 +7,8 @@
 #ifndef SQLTOAST_LEXEME_H
 #define SQLTOAST_LEXEME_H
 
+#include <stdio.h>
+
 namespace sqltoast {
 
 typedef std::vector<char> parse_input_t;
@@ -17,7 +19,7 @@ typedef parse_input_t::const_iterator parse_position_t;
 typedef struct lexeme {
     parse_position_t start;
     parse_position_t end;
-    lexeme() :start(0), end(0)
+    lexeme() : start(), end()
     {}
     lexeme(
         parse_position_t start,
@@ -28,14 +30,17 @@ typedef struct lexeme {
         return end - start;
     }
     inline operator bool() const {
-        return start != parse_position_t(0);
+        return start != parse_position_t(); // mfw
     }
+    
 } lexeme_t;
 
 inline std::ostream& operator<< (std::ostream& out, const lexeme_t& word) {
     out << std::string(word.start, word.end);
     return out;
 }
+
+
 
 } // namespace sqltoast
 

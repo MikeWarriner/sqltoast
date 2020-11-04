@@ -57,6 +57,7 @@ SET_TARGET_PROPERTIES(sqltoast PROPERTIES
     CXX_STANDARD_REQUIRED YES
     CXX_EXTENSIONS NO
 )
+#set(CMAKE_CXX_FLAGS "-stdlib=libc++")
 SET(LIBSQLTOAST_BUILD_OPTS, "-Wall --no-rtti")
 TARGET_COMPILE_OPTIONS(sqltoast
     PUBLIC ${LIBSQLTOAST_BUILD_OPTS}
@@ -94,7 +95,7 @@ TARGET_INCLUDE_DIRECTORIES(sqltoast
         src)
 
 # Include libunwind when we're in debug mode
-if (${BUILD_TYPE_LOWER} STREQUAL "debug")
+if ("${BUILD_TYPE_LOWER}" STREQUAL "debug")
     FIND_PACKAGE(libunwind REQUIRED)
     TARGET_LINK_LIBRARIES(sqltoast ${LIBUNWIND_LIBRARIES})
 endif ()
